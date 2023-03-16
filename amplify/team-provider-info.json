@@ -20,6 +20,15 @@
           "appId": "d1kqv8oqjj4jp4",
           "type": "manual"
         }
+      },
+      "api": {
+        "UCTestApp": {}
+      },
+      "function": {
+        "graphQlLambdaAuthorizer2779c82f": {
+          "deploymentBucketName": "amplify-uctestapp-staging-95844-deployment",
+          "s3Key": "amplify-builds/graphQlLambdaAuthorizer2779c82f-4379505a586270634845-build.zip"
+        }
       }
     }
   }

@@ -27,7 +27,7 @@
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
-        "mfaConfiguration": "ON",
+        "mfaConfiguration": "OFF",
         "mfaTypes": [
           "SMS",
           "TOTP"
@@ -47,11 +47,18 @@
           "EMAIL"
         ],
         "verificationMechanisms": [
-          "PHONE_NUMBER"
+          "EMAIL"
         ]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "graphQlLambdaAuthorizer2779c82f": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "hosting": {
@@ -62,6 +69,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_graphQlLambdaAuthorizer2779c82f_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "graphQlLambdaAuthorizer2779c82f"
+        }
+      ]
+    },
+    "AMPLIFY_function_graphQlLambdaAuthorizer2779c82f_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "graphQlLambdaAuthorizer2779c82f"
+        }
+      ]
+    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {

@@ -6,9 +6,9 @@
     "resourceNameTruncated": "uctestec2348a6",
     "userPoolName": "UCTestApp",
     "autoVerifiedAttributes": [
-      "phone_number"
+      "email"
     ],
-    "mfaConfiguration": "ON",
+    "mfaConfiguration": "OFF",
     "mfaTypes": [
       "SMS Text Message",
       "TOTP"
@@ -64,4 +64,4 @@
     "dependsOn": [],
     "hostedUI": false
   }
-}
+} 

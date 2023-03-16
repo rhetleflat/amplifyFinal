@@ -36,6 +36,7 @@ export default function AnsattCreateForm(props) {
     telefon: "",
     ansattDato: "",
     sluttetDato: "",
+    bilde: "",
   };
   const [navn, setNavn] = React.useState(initialValues.navn);
   const [tittel, setTittel] = React.useState(initialValues.tittel);
@@ -46,6 +47,7 @@ export default function AnsattCreateForm(props) {
   const [sluttetDato, setSluttetDato] = React.useState(
     initialValues.sluttetDato
   );
+  const [bilde, setBilde] = React.useState(initialValues.bilde);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setNavn(initialValues.navn);
@@ -55,6 +57,7 @@ export default function AnsattCreateForm(props) {
     setTelefon(initialValues.telefon);
     setAnsattDato(initialValues.ansattDato);
     setSluttetDato(initialValues.sluttetDato);
+    setBilde(initialValues.bilde);
     setErrors({});
   };
   const validations = {
@@ -65,6 +68,7 @@ export default function AnsattCreateForm(props) {
     telefon: [{ type: "Required" }, { type: "Phone" }],
     ansattDato: [{ type: "Required" }],
     sluttetDato: [{ type: "Required" }],
+    bilde: [{ type: "URL" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -99,6 +103,7 @@ export default function AnsattCreateForm(props) {
           telefon,
           ansattDato,
           sluttetDato,
+          bilde,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -186,6 +191,7 @@ export default function AnsattCreateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.navn ?? value;
@@ -216,6 +222,7 @@ export default function AnsattCreateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.tittel ?? value;
@@ -246,6 +253,7 @@ export default function AnsattCreateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.stilling ?? value;
@@ -292,6 +300,7 @@ export default function AnsattCreateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.epost ?? value;
@@ -323,6 +332,7 @@ export default function AnsattCreateForm(props) {
               telefon: value,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.telefon ?? value;
@@ -354,6 +364,7 @@ export default function AnsattCreateForm(props) {
               telefon,
               ansattDato: value,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.ansattDato ?? value;
@@ -385,6 +396,7 @@ export default function AnsattCreateForm(props) {
               telefon,
               ansattDato,
               sluttetDato: value,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.sluttetDato ?? value;
@@ -398,6 +410,37 @@ export default function AnsattCreateForm(props) {
         errorMessage={errors.sluttetDato?.errorMessage}
         hasError={errors.sluttetDato?.hasError}
         {...getOverrideProps(overrides, "sluttetDato")}
+      ></TextField>
+      <TextField
+        label="Bilde"
+        isRequired={false}
+        isReadOnly={false}
+        value={bilde}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              navn,
+              tittel,
+              stilling,
+              epost,
+              telefon,
+              ansattDato,
+              sluttetDato,
+              bilde: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.bilde ?? value;
+          }
+          if (errors.bilde?.hasError) {
+            runValidationTasks("bilde", value);
+          }
+          setBilde(value);
+        }}
+        onBlur={() => runValidationTasks("bilde", bilde)}
+        errorMessage={errors.bilde?.errorMessage}
+        hasError={errors.bilde?.hasError}
+        {...getOverrideProps(overrides, "bilde")}
       ></TextField>
       <Flex
         justifyContent="space-between"

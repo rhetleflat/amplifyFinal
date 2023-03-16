@@ -37,6 +37,7 @@ export default function AnsattUpdateForm(props) {
     telefon: "",
     ansattDato: "",
     sluttetDato: "",
+    bilde: "",
   };
   const [navn, setNavn] = React.useState(initialValues.navn);
   const [tittel, setTittel] = React.useState(initialValues.tittel);
@@ -47,6 +48,7 @@ export default function AnsattUpdateForm(props) {
   const [sluttetDato, setSluttetDato] = React.useState(
     initialValues.sluttetDato
   );
+  const [bilde, setBilde] = React.useState(initialValues.bilde);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = ansattRecord
@@ -59,6 +61,7 @@ export default function AnsattUpdateForm(props) {
     setTelefon(cleanValues.telefon);
     setAnsattDato(cleanValues.ansattDato);
     setSluttetDato(cleanValues.sluttetDato);
+    setBilde(cleanValues.bilde);
     setErrors({});
   };
   const [ansattRecord, setAnsattRecord] = React.useState(ansatt);
@@ -77,7 +80,8 @@ export default function AnsattUpdateForm(props) {
     epost: [{ type: "Required" }, { type: "Email" }],
     telefon: [{ type: "Required" }, { type: "Phone" }],
     ansattDato: [{ type: "Required" }],
-    sluttetDato: [{ type: "Required" }],
+    sluttetDato: [],
+    bilde: [{ type: "URL" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -112,6 +116,7 @@ export default function AnsattUpdateForm(props) {
           telefon,
           ansattDato,
           sluttetDato,
+          bilde,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -174,6 +179,7 @@ export default function AnsattUpdateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.navn ?? value;
@@ -204,6 +210,7 @@ export default function AnsattUpdateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.tittel ?? value;
@@ -234,6 +241,7 @@ export default function AnsattUpdateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.stilling ?? value;
@@ -280,6 +288,7 @@ export default function AnsattUpdateForm(props) {
               telefon,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.epost ?? value;
@@ -311,6 +320,7 @@ export default function AnsattUpdateForm(props) {
               telefon: value,
               ansattDato,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.telefon ?? value;
@@ -342,6 +352,7 @@ export default function AnsattUpdateForm(props) {
               telefon,
               ansattDato: value,
               sluttetDato,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.ansattDato ?? value;
@@ -358,7 +369,7 @@ export default function AnsattUpdateForm(props) {
       ></TextField>
       <TextField
         label="Sluttet dato"
-        isRequired={true}
+        isRequired={false}
         isReadOnly={false}
         type="date"
         value={sluttetDato}
@@ -373,6 +384,7 @@ export default function AnsattUpdateForm(props) {
               telefon,
               ansattDato,
               sluttetDato: value,
+              bilde,
             };
             const result = onChange(modelFields);
             value = result?.sluttetDato ?? value;
@@ -386,6 +398,37 @@ export default function AnsattUpdateForm(props) {
         errorMessage={errors.sluttetDato?.errorMessage}
         hasError={errors.sluttetDato?.hasError}
         {...getOverrideProps(overrides, "sluttetDato")}
+      ></TextField>
+      <TextField
+        label="Bilde"
+        isRequired={false}
+        isReadOnly={false}
+        value={bilde}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              navn,
+              tittel,
+              stilling,
+              epost,
+              telefon,
+              ansattDato,
+              sluttetDato,
+              bilde: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.bilde ?? value;
+          }
+          if (errors.bilde?.hasError) {
+            runValidationTasks("bilde", value);
+          }
+          setBilde(value);
+        }}
+        onBlur={() => runValidationTasks("bilde", bilde)}
+        errorMessage={errors.bilde?.errorMessage}
+        hasError={errors.bilde?.hasError}
+        {...getOverrideProps(overrides, "bilde")}
       ></TextField>
       <Flex
         justifyContent="space-between"

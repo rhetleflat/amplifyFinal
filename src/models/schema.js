@@ -231,7 +231,7 @@ export const schema = {
                     "name": "sluttetDato",
                     "isArray": false,
                     "type": "AWSDate",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "AnsattTimers": {
@@ -249,6 +249,13 @@ export const schema = {
                             "ansattID"
                         ]
                     }
+                },
+                "bilde": {
+                    "name": "bilde",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -305,5 +312,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "8f92aa717fdc91edab87cd07f7dac28c"
+    "version": "f7066ae6fe3186fea8b866a6fd37e3e2"
 };

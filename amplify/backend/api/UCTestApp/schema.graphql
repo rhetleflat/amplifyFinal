@@ -26,7 +26,8 @@ type Ansatt @model @auth(rules: [{allow: public}]) {
   epost: AWSEmail!
   telefon: AWSPhone!
   ansattDato: AWSDate!
-  sluttetDato: AWSDate!
+  sluttetDato: AWSDate
   AnsattTimers: [AnsattTimer] @hasMany(indexName: "byAnsatt", fields: ["id"])
+  bilde: AWSURL
 }
  

@@ -21,6 +21,7 @@ export declare type AnsattUpdateFormInputValues = {
     telefon?: string;
     ansattDato?: string;
     sluttetDato?: string;
+    bilde?: string;
 };
 export declare type AnsattUpdateFormValidationValues = {
     navn?: ValidationFunction<string>;
@@ -30,6 +31,7 @@ export declare type AnsattUpdateFormValidationValues = {
     telefon?: ValidationFunction<string>;
     ansattDato?: ValidationFunction<string>;
     sluttetDato?: ValidationFunction<string>;
+    bilde?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type AnsattUpdateFormOverridesProps = {
@@ -41,6 +43,7 @@ export declare type AnsattUpdateFormOverridesProps = {
     telefon?: PrimitiveOverrideProps<TextFieldProps>;
     ansattDato?: PrimitiveOverrideProps<TextFieldProps>;
     sluttetDato?: PrimitiveOverrideProps<TextFieldProps>;
+    bilde?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type AnsattUpdateFormProps = React.PropsWithChildren<{
     overrides?: AnsattUpdateFormOverridesProps | undefined | null;

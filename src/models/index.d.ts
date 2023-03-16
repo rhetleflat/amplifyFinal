@@ -88,8 +88,9 @@ type EagerAnsatt = {
   readonly epost: string;
   readonly telefon: string;
   readonly ansattDato: string;
-  readonly sluttetDato: string;
+  readonly sluttetDato?: string | null;
   readonly AnsattTimers?: (AnsattTimer | null)[] | null;
+  readonly bilde?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -106,8 +107,9 @@ type LazyAnsatt = {
   readonly epost: string;
   readonly telefon: string;
   readonly ansattDato: string;
-  readonly sluttetDato: string;
+  readonly sluttetDato?: string | null;
   readonly AnsattTimers: AsyncCollection<AnsattTimer>;
+  readonly bilde?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
