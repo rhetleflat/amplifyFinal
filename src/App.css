@@ -1,6 +1,12 @@
-.App {
-  text-align: center;
+.App {  
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: '100vh';
+  max-width: 50%;
+  min-width: 500px;
 }
+
 
 .App-logo {
   height: 40vmin;
