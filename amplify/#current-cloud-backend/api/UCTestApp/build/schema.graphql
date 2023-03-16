@@ -1,0 +1,431 @@
+
+type AnsattTimer @aws_iam @aws_api_key {
+  id: ID!
+  ansattID: ID!
+  Prosjekt: Prosjekt
+  fraDato: AWSDate
+  tilDato: AWSDate
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+  ansattTimerProsjektId: ID
+}
+
+type Prosjekt @aws_iam @aws_api_key {
+  id: ID!
+  prosjektNavn: String!
+  timepris: Float!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+enum Stillinger {
+  DAGLIG_LEDER
+  SYSTEMKONSULENT
+  ARKITEKT
+}
+
+type Ansatt @aws_iam @aws_api_key {
+  id: ID!
+  navn: String!
+  tittel: String!
+  stilling: Stillinger!
+  epost: AWSEmail!
+  telefon: AWSPhone!
+  ansattDato: AWSDate!
+  sluttetDato: AWSDate
+  AnsattTimers(filter: ModelAnsattTimerFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelAnsattTimerConnection
+  bilde: AWSURL
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  _version: Int!
+  _deleted: Boolean
+  _lastChangedAt: AWSTimestamp!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelAnsattTimerConnection @aws_api_key @aws_iam {
+  items: [AnsattTimer]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelAnsattTimerFilterInput {
+  id: ModelIDInput
+  ansattID: ModelIDInput
+  fraDato: ModelStringInput
+  tilDato: ModelStringInput
+  and: [ModelAnsattTimerFilterInput]
+  or: [ModelAnsattTimerFilterInput]
+  not: ModelAnsattTimerFilterInput
+  ansattTimerProsjektId: ModelIDInput
+}
+
+type Query {
+  getAnsattTimer(id: ID!): AnsattTimer @aws_api_key @aws_iam
+  listAnsattTimers(filter: ModelAnsattTimerFilterInput, limit: Int, nextToken: String): ModelAnsattTimerConnection @aws_api_key @aws_iam
+  syncAnsattTimers(filter: ModelAnsattTimerFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelAnsattTimerConnection @aws_api_key @aws_iam
+  ansattTimersByAnsattID(ansattID: ID!, sortDirection: ModelSortDirection, filter: ModelAnsattTimerFilterInput, limit: Int, nextToken: String): ModelAnsattTimerConnection @aws_api_key @aws_iam
+  getProsjekt(id: ID!): Prosjekt @aws_api_key @aws_iam
+  listProsjekts(filter: ModelProsjektFilterInput, limit: Int, nextToken: String): ModelProsjektConnection @aws_api_key @aws_iam
+  syncProsjekts(filter: ModelProsjektFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelProsjektConnection @aws_api_key @aws_iam
+  getAnsatt(id: ID!): Ansatt @aws_api_key @aws_iam
+  listAnsatts(filter: ModelAnsattFilterInput, limit: Int, nextToken: String): ModelAnsattConnection @aws_api_key @aws_iam
+  syncAnsatts(filter: ModelAnsattFilterInput, limit: Int, nextToken: String, lastSync: AWSTimestamp): ModelAnsattConnection @aws_api_key @aws_iam
+}
+
+input ModelAnsattTimerConditionInput {
+  ansattID: ModelIDInput
+  fraDato: ModelStringInput
+  tilDato: ModelStringInput
+  and: [ModelAnsattTimerConditionInput]
+  or: [ModelAnsattTimerConditionInput]
+  not: ModelAnsattTimerConditionInput
+  ansattTimerProsjektId: ModelIDInput
+}
+
+input CreateAnsattTimerInput {
+  id: ID
+  ansattID: ID!
+  fraDato: AWSDate
+  tilDato: AWSDate
+  _version: Int
+  ansattTimerProsjektId: ID
+}
+
+input UpdateAnsattTimerInput {
+  id: ID!
+  ansattID: ID
+  fraDato: AWSDate
+  tilDato: AWSDate
+  _version: Int
+  ansattTimerProsjektId: ID
+}
+
+input DeleteAnsattTimerInput {
+  id: ID!
+  _version: Int
+}
+
+type Mutation {
+  createAnsattTimer(input: CreateAnsattTimerInput!, condition: ModelAnsattTimerConditionInput): AnsattTimer @aws_api_key @aws_iam
+  updateAnsattTimer(input: UpdateAnsattTimerInput!, condition: ModelAnsattTimerConditionInput): AnsattTimer @aws_api_key @aws_iam
+  deleteAnsattTimer(input: DeleteAnsattTimerInput!, condition: ModelAnsattTimerConditionInput): AnsattTimer @aws_api_key @aws_iam
+  createProsjekt(input: CreateProsjektInput!, condition: ModelProsjektConditionInput): Prosjekt @aws_api_key @aws_iam
+  updateProsjekt(input: UpdateProsjektInput!, condition: ModelProsjektConditionInput): Prosjekt @aws_api_key @aws_iam
+  deleteProsjekt(input: DeleteProsjektInput!, condition: ModelProsjektConditionInput): Prosjekt @aws_api_key @aws_iam
+  createAnsatt(input: CreateAnsattInput!, condition: ModelAnsattConditionInput): Ansatt @aws_api_key @aws_iam
+  updateAnsatt(input: UpdateAnsattInput!, condition: ModelAnsattConditionInput): Ansatt @aws_api_key @aws_iam
+  deleteAnsatt(input: DeleteAnsattInput!, condition: ModelAnsattConditionInput): Ansatt @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionAnsattTimerFilterInput {
+  id: ModelSubscriptionIDInput
+  ansattID: ModelSubscriptionIDInput
+  fraDato: ModelSubscriptionStringInput
+  tilDato: ModelSubscriptionStringInput
+  and: [ModelSubscriptionAnsattTimerFilterInput]
+  or: [ModelSubscriptionAnsattTimerFilterInput]
+}
+
+type Subscription {
+  onCreateAnsattTimer(filter: ModelSubscriptionAnsattTimerFilterInput): AnsattTimer @aws_subscribe(mutations: ["createAnsattTimer"]) @aws_api_key @aws_iam
+  onUpdateAnsattTimer(filter: ModelSubscriptionAnsattTimerFilterInput): AnsattTimer @aws_subscribe(mutations: ["updateAnsattTimer"]) @aws_api_key @aws_iam
+  onDeleteAnsattTimer(filter: ModelSubscriptionAnsattTimerFilterInput): AnsattTimer @aws_subscribe(mutations: ["deleteAnsattTimer"]) @aws_api_key @aws_iam
+  onCreateProsjekt(filter: ModelSubscriptionProsjektFilterInput): Prosjekt @aws_subscribe(mutations: ["createProsjekt"]) @aws_api_key @aws_iam
+  onUpdateProsjekt(filter: ModelSubscriptionProsjektFilterInput): Prosjekt @aws_subscribe(mutations: ["updateProsjekt"]) @aws_api_key @aws_iam
+  onDeleteProsjekt(filter: ModelSubscriptionProsjektFilterInput): Prosjekt @aws_subscribe(mutations: ["deleteProsjekt"]) @aws_api_key @aws_iam
+  onCreateAnsatt(filter: ModelSubscriptionAnsattFilterInput): Ansatt @aws_subscribe(mutations: ["createAnsatt"]) @aws_api_key @aws_iam
+  onUpdateAnsatt(filter: ModelSubscriptionAnsattFilterInput): Ansatt @aws_subscribe(mutations: ["updateAnsatt"]) @aws_api_key @aws_iam
+  onDeleteAnsatt(filter: ModelSubscriptionAnsattFilterInput): Ansatt @aws_subscribe(mutations: ["deleteAnsatt"]) @aws_api_key @aws_iam
+}
+
+type ModelProsjektConnection @aws_api_key @aws_iam {
+  items: [Prosjekt]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelProsjektFilterInput {
+  id: ModelIDInput
+  prosjektNavn: ModelStringInput
+  timepris: ModelFloatInput
+  and: [ModelProsjektFilterInput]
+  or: [ModelProsjektFilterInput]
+  not: ModelProsjektFilterInput
+}
+
+input ModelProsjektConditionInput {
+  prosjektNavn: ModelStringInput
+  timepris: ModelFloatInput
+  and: [ModelProsjektConditionInput]
+  or: [ModelProsjektConditionInput]
+  not: ModelProsjektConditionInput
+}
+
+input CreateProsjektInput {
+  id: ID
+  prosjektNavn: String!
+  timepris: Float!
+  _version: Int
+}
+
+input UpdateProsjektInput {
+  id: ID!
+  prosjektNavn: String
+  timepris: Float
+  _version: Int
+}
+
+input DeleteProsjektInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionProsjektFilterInput {
+  id: ModelSubscriptionIDInput
+  prosjektNavn: ModelSubscriptionStringInput
+  timepris: ModelSubscriptionFloatInput
+  and: [ModelSubscriptionProsjektFilterInput]
+  or: [ModelSubscriptionProsjektFilterInput]
+}
+
+type ModelAnsattConnection @aws_api_key @aws_iam {
+  items: [Ansatt]!
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelStillingerInput {
+  eq: Stillinger
+  ne: Stillinger
+}
+
+input ModelAnsattFilterInput {
+  id: ModelIDInput
+  navn: ModelStringInput
+  tittel: ModelStringInput
+  stilling: ModelStillingerInput
+  epost: ModelStringInput
+  telefon: ModelStringInput
+  ansattDato: ModelStringInput
+  sluttetDato: ModelStringInput
+  bilde: ModelStringInput
+  and: [ModelAnsattFilterInput]
+  or: [ModelAnsattFilterInput]
+  not: ModelAnsattFilterInput
+}
+
+input ModelAnsattConditionInput {
+  navn: ModelStringInput
+  tittel: ModelStringInput
+  stilling: ModelStillingerInput
+  epost: ModelStringInput
+  telefon: ModelStringInput
+  ansattDato: ModelStringInput
+  sluttetDato: ModelStringInput
+  bilde: ModelStringInput
+  and: [ModelAnsattConditionInput]
+  or: [ModelAnsattConditionInput]
+  not: ModelAnsattConditionInput
+}
+
+input CreateAnsattInput {
+  id: ID
+  navn: String!
+  tittel: String!
+  stilling: Stillinger!
+  epost: AWSEmail!
+  telefon: AWSPhone!
+  ansattDato: AWSDate!
+  sluttetDato: AWSDate
+  bilde: AWSURL
+  _version: Int
+}
+
+input UpdateAnsattInput {
+  id: ID!
+  navn: String
+  tittel: String
+  stilling: Stillinger
+  epost: AWSEmail
+  telefon: AWSPhone
+  ansattDato: AWSDate
+  sluttetDato: AWSDate
+  bilde: AWSURL
+  _version: Int
+}
+
+input DeleteAnsattInput {
+  id: ID!
+  _version: Int
+}
+
+input ModelSubscriptionAnsattFilterInput {
+  id: ModelSubscriptionIDInput
+  navn: ModelSubscriptionStringInput
+  tittel: ModelSubscriptionStringInput
+  stilling: ModelSubscriptionStringInput
+  epost: ModelSubscriptionStringInput
+  telefon: ModelSubscriptionStringInput
+  ansattDato: ModelSubscriptionStringInput
+  sluttetDato: ModelSubscriptionStringInput
+  bilde: ModelSubscriptionStringInput
+  and: [ModelSubscriptionAnsattFilterInput]
+  or: [ModelSubscriptionAnsattFilterInput]
+}
+
