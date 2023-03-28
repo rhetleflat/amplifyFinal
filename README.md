@@ -45,3 +45,9 @@ type Ansatt @model @auth(rules: [{allow: public}]) {
   AnsattTimers: [AnsattTimer] @hasMany(indexName: "byAnsatt", fields: ["id"])
   bilde: AWSURL
 }
+
+Link til UC logo
+
+https://uc.no/wp-content/uploads/2020/06/cropped-cropped-Ulriken_C_logo_white_rgb-e1591863674845.png
+
+
