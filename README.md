@@ -7,3 +7,38 @@
 7. amplify push
 8. amplify add hosting
 8. amplify publish
+
+
+Datamodell:
+
+type AnsattTimer @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  ansattID: ID! @index(name: "byAnsatt")
+  Prosjekt: Prosjekt @hasOne
+  fraDato: AWSDate
+  tilDato: AWSDate
+}
+
+type Prosjekt @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  prosjektNavn: String!
+  timepris: Float!
+}
+
+enum Stillinger {
+  DAGLIG_LEDER
+  SYSTEMKONSULENT
+  ARKITEKT
+}
+
+type Ansatt @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  navn: String!  
+  stilling: Stillinger!
+  epost: AWSEmail!
+  telefon: AWSPhone!
+  ansattDato: AWSDate!
+  sluttetDato: AWSDate
+  AnsattTimers: [AnsattTimer] @hasMany(indexName: "byAnsatt", fields: ["id"])
+  bilde: AWSURL
+}
