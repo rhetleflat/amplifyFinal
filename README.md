@@ -8,6 +8,9 @@
 8. amplify add hosting
 8. amplify publish
 
+Figma link:
+https://www.figma.com/file/xr8w3LA0h1iEBmFfNd99LP/Roberts-Components?node-id=2653-2886&t=GXOq9p5DeKDkWNA9-0
+
 
 Datamodell:
 
