@@ -50,4 +50,6 @@ Link til UC logo
 
 https://uc.no/wp-content/uploads/2020/06/cropped-cropped-Ulriken_C_logo_white_rgb-e1591863674845.png
 
+Bildegaleri:
 
+http://utestapp-storage-79d4d08d12c95844-staging.s3-website.eu-north-1.amazonaws.com/
