@@ -53,3 +53,12 @@ https://uc.no/wp-content/uploads/2020/06/cropped-cropped-Ulriken_C_logo_white_rg
 Bildegaleri:
 
 http://utestapp-storage-79d4d08d12c95844-staging.s3-website.eu-north-1.amazonaws.com/
+
+Add rewrite rule
+
+</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>
+
+/index.html
+
+
+
