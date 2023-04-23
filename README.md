@@ -5,10 +5,11 @@
 5. npx create-react-app my-uc-app
 6. npm install "@aws-amplify/ui-react@^4.0.1
 7. npm install "aws-amplify@^5.0.2"
-8. amplify pull --appId d1kqv8oqjj4jp4 --envName staging
-9. amplify push
-10. amplify add hosting
-11. amplify publish
+8.  npm install "react-router-dom"
+9. amplify pull --appId d1kqv8oqjj4jp4 --envName staging
+10. amplify push
+11. amplify add hosting
+12. amplify publish
 
 Figma link:
 https://www.figma.com/file/xr8w3LA0h1iEBmFfNd99LP/Roberts-Components?node-id=2653-2886&t=GXOq9p5DeKDkWNA9-0
