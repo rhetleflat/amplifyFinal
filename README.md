@@ -7,9 +7,10 @@
 7. npm install "aws-amplify@^5.0.2"
 8.  npm install "react-router-dom"
 9. amplify pull --appId d1kqv8oqjj4jp4 --envName staging
-10. amplify push
-11. amplify add hosting
-12. amplify publish
+10. amplify codegen
+11. amplify push
+12. amplify add hosting
+13. amplify publish
 
 Figma link:
 https://www.figma.com/file/xr8w3LA0h1iEBmFfNd99LP/Roberts-Components?node-id=2653-2886&t=GXOq9p5DeKDkWNA9-0
